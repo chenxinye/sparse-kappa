@@ -2,6 +2,8 @@
 
 # sparse-kappa
 
+[![!pypi](https://img.shields.io/pypi/v/sparse-kappa?color=red)](https://pypi.org/project/sparse-kappa/)
+
 **Condition Number Estimation on GPUs for Sparse Matrices**
 
 
