@@ -1,0 +1,85 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9', '3.10', '3.11']
+      fail-fast: false
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest pytest-cov numpy scipy
+        pip install -e .
+
+    - name: Run tests with coverage
+      run: |
+        pytest tests/ -v --cov=sparse_kappa --cov-report=xml --cov-report=term
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
+        verbose: true
+
+  test-gpu:
+    runs-on: ubuntu-latest
+    container:
+      image: nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install Python and dependencies
+      run: |
+        apt-get update
+        apt-get install -y python3 python3-pip git
+        python3 -m pip install --upgrade pip
+        pip install pytest pytest-cov numpy scipy
+        pip install cupy-cuda11x
+        pip install -e .
+
+    - name: Run GPU tests (if CUDA available)
+      continue-on-error: true
+      run: |
+        python3 -c "import cupy; print('CuPy version:', cupy.__version__)" || echo "CuPy not available, skipping GPU tests"
+        pytest tests/ -v --cov=sparse_kappa --cov-report=xml --cov-report=term || echo "GPU tests failed or skipped"
+
+    - name: Upload GPU coverage to Codecov
+      uses: codecov/codecov-action@v4
+      if: success()
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage.xml
+        flags: gpu-tests
+        name: codecov-gpu
+        fail_ci_if_error: false
+        verbose: true

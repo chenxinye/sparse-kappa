@@ -1,0 +1,4 @@
+.pytest_cache/
+sparse_kappa.egg-info/
+__pycache__/
+*.py[cod]
