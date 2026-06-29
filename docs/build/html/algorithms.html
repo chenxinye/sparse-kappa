@@ -1,0 +1,621 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Examples" href="examples.html"><link rel="prev" title="Methods and Algorithms" href="methods.html">
+
+    <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>Algorithm Reference - sparse-kappa documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=acfd86a5" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">sparse-kappa documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <span class="sidebar-brand-text">sparse-kappa documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods.html">Methods and Algorithms</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Algorithm Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api/index.html">API reference</a><input aria-label="Toggle navigation of API reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/main.html">Main API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/solvers.html">Solver API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/norm1.html">1-norm methods API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/norm2.html">2-norm methods API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/gnn.html">GNN API</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/chenxinye/sparse-kappa/blob/master/docs/source/algorithms.rst?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/chenxinye/sparse-kappa/edit/master/docs/source/algorithms.rst" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="algorithm-reference">
+<h1>Algorithm Reference<a class="headerlink" href="#algorithm-reference" title="Link to this heading">¶</a></h1>
+<p>This document provides mathematical details of the algorithms implemented in Sparse Kappa.</p>
+<section id="norm-algorithms">
+<h2>1-Norm Algorithms<a class="headerlink" href="#norm-algorithms" title="Link to this heading">¶</a></h2>
+<section id="hager-higham-algorithm">
+<h3>Hager-Higham Algorithm<a class="headerlink" href="#hager-higham-algorithm" title="Link to this heading">¶</a></h3>
+<p><strong>Reference</strong>: Higham &amp; Tisseur (2000), SIAM J. Matrix Anal. Appl.</p>
+<p><strong>Problem</strong>: Estimate <span class="math notranslate nohighlight">\(\kappa_1(A) = \|A\|_1 \cdot \|A^{-1}\|_1\)</span></p>
+<p><strong>Algorithm</strong>:</p>
+<ol class="arabic">
+<li><p>Compute <span class="math notranslate nohighlight">\(\|A\|_1\)</span> exactly:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\|A\|_1 = \max_j \sum_{i=1}^n |a_{ij}|\]</div>
+</div>
+</li>
+<li><p>Initialize <span class="math notranslate nohighlight">\(x = \mathbf{1}/n\)</span> where <span class="math notranslate nohighlight">\(\mathbf{1} = (1,1,\ldots,1)^T\)</span></p></li>
+<li><p>For <span class="math notranslate nohighlight">\(k = 1, 2, \ldots, k_{\max}\)</span>:</p>
+<ol class="loweralpha simple">
+<li><p>Solve <span class="math notranslate nohighlight">\(Aw = x\)</span> for <span class="math notranslate nohighlight">\(w\)</span></p></li>
+<li><p>Estimate <span class="math notranslate nohighlight">\(\gamma = \|w\|_1\)</span></p></li>
+<li><p>Compute <span class="math notranslate nohighlight">\(\text{sign}(w) = (\text{sgn}(w_1), \ldots, \text{sgn}(w_n))^T\)</span></p></li>
+<li><p>Solve <span class="math notranslate nohighlight">\(A^T z = \text{sign}(w)\)</span> for <span class="math notranslate nohighlight">\(z\)</span></p></li>
+<li><p><strong>Stopping criterion</strong>: If <span class="math notranslate nohighlight">\(\max_i |z_i| \leq z^T x\)</span>, stop</p></li>
+<li><p>Find <span class="math notranslate nohighlight">\(j = \arg\max_i |z_i|\)</span></p></li>
+<li><p>Update <span class="math notranslate nohighlight">\(x = e_j\)</span> (standard basis vector)</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(x\)</span> unchanged, stop</p></li>
+</ol>
+</li>
+<li><p>Return <span class="math notranslate nohighlight">\(\kappa_1(A) = \|A\|_1 \cdot \gamma\)</span></p></li>
+</ol>
+<p><strong>Complexity</strong>: <span class="math notranslate nohighlight">\(O(k \cdot \text{nnz}(A))\)</span> where <span class="math notranslate nohighlight">\(k\)</span> is iterations</p>
+<p><strong>Why LU is crucial</strong>:
+- Requires <span class="math notranslate nohighlight">\(2k + 2\)</span> solves with <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(A^T\)</span>
+- LU factorization: Compute once, solve <span class="math notranslate nohighlight">\(O(n^2)\)</span> each
+- LSMR: Each solve is <span class="math notranslate nohighlight">\(O(m \cdot \text{nnz}(A))\)</span></p>
+</section>
+<section id="power-iteration-1-norm">
+<h3>Power Iteration (1-norm)<a class="headerlink" href="#power-iteration-1-norm" title="Link to this heading">¶</a></h3>
+<p><strong>Problem</strong>: Estimate <span class="math notranslate nohighlight">\(\|A^{-1}\|_1\)</span></p>
+<p><strong>Algorithm</strong>:</p>
+<ol class="arabic simple">
+<li><p>Initialize <span class="math notranslate nohighlight">\(x\)</span> randomly, normalize by <span class="math notranslate nohighlight">\(\|x\|_1\)</span></p></li>
+<li><p>For <span class="math notranslate nohighlight">\(k = 1, 2, \ldots\)</span>:</p>
+<ol class="loweralpha simple">
+<li><p>Solve <span class="math notranslate nohighlight">\(Ay = x\)</span> for <span class="math notranslate nohighlight">\(y\)</span></p></li>
+<li><p>Estimate <span class="math notranslate nohighlight">\(\gamma = \|y\|_1\)</span></p></li>
+<li><p>Normalize <span class="math notranslate nohighlight">\(x = y / \|y\|_1\)</span></p></li>
+<li><p>If converged, stop</p></li>
+</ol>
+</li>
+<li><p>Return <span class="math notranslate nohighlight">\(\|A^{-1}\|_1 \approx \gamma\)</span></p></li>
+</ol>
+<p><strong>Convergence</strong>: Linear, depends on eigenvalue gap</p>
+</section>
+<section id="oettli-prager-method">
+<h3>Oettli-Prager Method<a class="headerlink" href="#oettli-prager-method" title="Link to this heading">¶</a></h3>
+<p><strong>Reference</strong>: Oettli &amp; Prager (1964), Numer. Math.</p>
+<p><strong>Idea</strong>: Sample columns to estimate <span class="math notranslate nohighlight">\(\|A^{-1}\|_1\)</span></p>
+<p><strong>Variants</strong>:</p>
+<ol class="arabic">
+<li><p><strong>Adaptive</strong> (original):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Start with column j* = argmax ||A(:,j)||₁
+Solve A x = e_j*
+Use dual problem A^T y = sign(x) to select next column
+Repeat until converged
+</pre></div>
+</div>
+</li>
+<li><p><strong>Random</strong>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Sample random vectors b₁, b₂, ..., b_m
+Solve A x_i = b_i
+Return max ||x_i||₁
+</pre></div>
+</div>
+</li>
+<li><p><strong>Hybrid</strong>:</p>
+<p>Combines adaptive and random strategies</p>
+</li>
+</ol>
+</section>
+</section>
+<section id="id1">
+<h2>2-Norm Algorithms<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<section id="singular-value-decomposition-svds">
+<h3>Singular Value Decomposition (SVDS)<a class="headerlink" href="#singular-value-decomposition-svds" title="Link to this heading">¶</a></h3>
+<p><strong>Problem</strong>: Compute <span class="math notranslate nohighlight">\(\kappa_2(A) = \sigma_{\max}(A) / \sigma_{\min}(A)\)</span></p>
+<p><strong>Method</strong>: Partial SVD using Lanczos bidiagonalization</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[A = U \Sigma V^T\]</div>
+</div>
+<p><strong>Algorithm</strong> (simplified):</p>
+<ol class="arabic simple">
+<li><p>Compute <span class="math notranslate nohighlight">\(k\)</span> largest singular values via Lanczos on <span class="math notranslate nohighlight">\(A^T A\)</span></p></li>
+<li><p>Compute <span class="math notranslate nohighlight">\(k\)</span> smallest singular values:</p>
+<ul class="simple">
+<li><p>Build <span class="math notranslate nohighlight">\(A^T A\)</span> as linear operator</p></li>
+<li><p>Use ARPACK with shift-invert for smallest eigenvalues</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma = \sqrt{\lambda(A^T A)}\)</span></p></li>
+</ul>
+</li>
+<li><p>Return <span class="math notranslate nohighlight">\(\kappa_2(A) = \sigma_{\max} / \sigma_{\min}\)</span></p></li>
+</ol>
+<p><strong>Accuracy</strong>: Exact for computed singular values</p>
+<p><strong>Complexity</strong>: <span class="math notranslate nohighlight">\(O(k \cdot \text{nnz}(A))\)</span> where <span class="math notranslate nohighlight">\(k\)</span> is number of singular values</p>
+</section>
+<section id="lanczos-method">
+<h3>Lanczos Method<a class="headerlink" href="#lanczos-method" title="Link to this heading">¶</a></h3>
+<p><strong>Reference</strong>: Golub &amp; Van Loan (2013), Matrix Computations</p>
+<p><strong>Idea</strong>: Build tridiagonal matrix <span class="math notranslate nohighlight">\(T\)</span> whose eigenvalues approximate those of <span class="math notranslate nohighlight">\(A^T A\)</span></p>
+<p><strong>Algorithm</strong>:</p>
+<ol class="arabic">
+<li><p>Start with random vector <span class="math notranslate nohighlight">\(v_1\)</span>, <span class="math notranslate nohighlight">\(\|v_1\|_2 = 1\)</span></p></li>
+<li><p>For <span class="math notranslate nohighlight">\(j = 1, 2, \ldots, k\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}w &amp;= A^T A v_j - \beta_{j-1} v_{j-1} \\
+\alpha_j &amp;= v_j^T w \\
+w &amp;= w - \alpha_j v_j \\
+\beta_j &amp;= \|w\|_2 \\
+v_{j+1} &amp;= w / \beta_j\end{split}\]</div>
+</div>
+</li>
+<li><p>Build tridiagonal matrix:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}T = \begin{pmatrix}
+\alpha_1 &amp; \beta_1 &amp; &amp; \\
+\beta_1 &amp; \alpha_2 &amp; \beta_2 &amp; \\
+&amp; \ddots &amp; \ddots &amp; \ddots \\
+&amp; &amp; \beta_{k-1} &amp; \alpha_k
+\end{pmatrix}\end{split}\]</div>
+</div>
+</li>
+<li><p>Compute eigenvalues <span class="math notranslate nohighlight">\(\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_k\)</span> of <span class="math notranslate nohighlight">\(T\)</span></p></li>
+<li><p>Estimate:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\sigma_{\max}(A) \approx \sqrt{\lambda_1}, \quad
+\sigma_{\min}(A) \approx \sqrt{\lambda_k}\]</div>
+</div>
+</li>
+</ol>
+<p><strong>For symmetric</strong> <span class="math notranslate nohighlight">\(A\)</span>: Apply Lanczos directly to <span class="math notranslate nohighlight">\(A\)</span></p>
+</section>
+<section id="golub-kahan-bidiagonalization">
+<h3>Golub-Kahan Bidiagonalization<a class="headerlink" href="#golub-kahan-bidiagonalization" title="Link to this heading">¶</a></h3>
+<p><strong>Reference</strong>: Golub &amp; Kahan (1965), SIAM J. Numer. Anal.</p>
+<p><strong>Advantage</strong>: More stable than forming <span class="math notranslate nohighlight">\(A^T A\)</span> explicitly</p>
+<p><strong>Algorithm</strong>:</p>
+<ol class="arabic">
+<li><p>Start with <span class="math notranslate nohighlight">\(u_1, v_1\)</span> random unit vectors</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(j = 1, 2, \ldots, k\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}v_j^* &amp;= A^T u_j - \beta_{j-1} v_{j-1} \\
+\alpha_j &amp;= \|v_j^*\|_2, \quad v_j = v_j^* / \alpha_j \\
+u_{j+1}^* &amp;= A v_j - \alpha_j u_j \\
+\beta_j &amp;= \|u_{j+1}^*\|_2, \quad u_{j+1} = u_{j+1}^* / \beta_j\end{split}\]</div>
+</div>
+</li>
+<li><p>Build bidiagonal matrix:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}B = \begin{pmatrix}
+\alpha_1 &amp; \beta_1 &amp; &amp; \\
+&amp; \alpha_2 &amp; \beta_2 &amp; \\
+&amp; &amp; \ddots &amp; \ddots \\
+&amp; &amp; &amp; \alpha_k
+\end{pmatrix}\end{split}\]</div>
+</div>
+</li>
+<li><p>Singular values of <span class="math notranslate nohighlight">\(B\)</span> approximate those of <span class="math notranslate nohighlight">\(A\)</span></p></li>
+</ol>
+<p><strong>Stability</strong>: Better conditioned than <span class="math notranslate nohighlight">\(A^T A\)</span></p>
+</section>
+<section id="power-method-2-norm">
+<h3>Power Method (2-norm)<a class="headerlink" href="#power-method-2-norm" title="Link to this heading">¶</a></h3>
+<p><strong>Problem</strong>: Estimate <span class="math notranslate nohighlight">\(\sigma_{\max}(A)\)</span></p>
+<p><strong>Algorithm</strong>:</p>
+<ol class="arabic">
+<li><p>Start with random vector <span class="math notranslate nohighlight">\(v\)</span>, <span class="math notranslate nohighlight">\(\|v\|_2 = 1\)</span></p></li>
+<li><p>For <span class="math notranslate nohighlight">\(k = 1, 2, \ldots\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}w &amp;= A^T A v \\
+\lambda &amp;= v^T w \\
+v &amp;= w / \|w\|_2\end{split}\]</div>
+</div>
+</li>
+<li><p>Return <span class="math notranslate nohighlight">\(\sigma_{\max} \approx \sqrt{\lambda}\)</span></p></li>
+</ol>
+<p><strong>For</strong> <span class="math notranslate nohighlight">\(\sigma_{\min}\)</span>: Use inverse iteration or shift-invert</p>
+</section>
+</section>
+<section id="convergence-analysis">
+<h2>Convergence Analysis<a class="headerlink" href="#convergence-analysis" title="Link to this heading">¶</a></h2>
+<section id="hager-higham">
+<h3>Hager-Higham<a class="headerlink" href="#hager-higham" title="Link to this heading">¶</a></h3>
+<p><strong>Typical iterations</strong>: 2-5</p>
+<p><strong>Convergence</strong>: Depends on matrix structure, not proven in general</p>
+<p><strong>In practice</strong>: Usually converges quickly</p>
+</section>
+<section id="power-iteration">
+<h3>Power Iteration<a class="headerlink" href="#power-iteration" title="Link to this heading">¶</a></h3>
+<p><strong>Convergence rate</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{error}_k \approx \left|\frac{\lambda_2}{\lambda_1}\right|^k \text{error}_0\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda_1, \lambda_2\)</span> are two largest eigenvalues.</p>
+<p><strong>Fast if</strong>: <span class="math notranslate nohighlight">\(\lambda_1 \gg \lambda_2\)</span> (well-separated)</p>
+</section>
+<section id="lanczos">
+<h3>Lanczos<a class="headerlink" href="#lanczos" title="Link to this heading">¶</a></h3>
+<p><strong>Accuracy</strong>: Extremal eigenvalues converge first</p>
+<p><strong>Iterations needed</strong>: Typically <span class="math notranslate nohighlight">\(k = 10-50\)</span> for good estimates</p>
+</section>
+</section>
+<section id="numerical-stability">
+<h2>Numerical Stability<a class="headerlink" href="#numerical-stability" title="Link to this heading">¶</a></h2>
+<section id="loss-of-orthogonality">
+<h3>Loss of Orthogonality<a class="headerlink" href="#loss-of-orthogonality" title="Link to this heading">¶</a></h3>
+<p><strong>Problem</strong>: In Lanczos, <span class="math notranslate nohighlight">\(v_j\)</span> vectors lose orthogonality due to rounding</p>
+<p><strong>Solution</strong>:</p>
+<ul class="simple">
+<li><p>Reorthogonalization</p></li>
+<li><p>Use more iterations</p></li>
+<li><p>Check residuals</p></li>
+</ul>
+</section>
+<section id="ill-conditioned-systems">
+<h3>Ill-Conditioned Systems<a class="headerlink" href="#ill-conditioned-systems" title="Link to this heading">¶</a></h3>
+<p><strong>Challenge</strong>: Solving <span class="math notranslate nohighlight">\(Ax = b\)</span> when <span class="math notranslate nohighlight">\(\kappa(A)\)</span> is large</p>
+<p><strong>Solutions</strong>:</p>
+<ol class="arabic simple">
+<li><p>Use iterative refinement</p></li>
+<li><p>Increase solver tolerance</p></li>
+<li><p>Use preconditioners</p></li>
+<li><p>Accept approximate results</p></li>
+</ol>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Hager, W. W.</strong> (1984). “Condition estimates.” <em>SIAM J. Sci. Stat. Comput.</em>, 5(2), 311-316.</p></li>
+<li><p><strong>Higham, N. J., &amp; Tisseur, F.</strong> (2000). “A block algorithm for matrix 1-norm estimation.” <em>SIAM J. Matrix Anal. Appl.</em>, 21(4), 1185-1201.</p></li>
+<li><p><strong>Golub, G. H., &amp; Van Loan, C. F.</strong> (2013). <em>Matrix Computations</em> (4th ed.). Johns Hopkins University Press.</p></li>
+<li><p><strong>Golub, G. H., &amp; Kahan, W.</strong> (1965). “Calculating the singular values and pseudo-inverse of a matrix.” <em>SIAM J. Numer. Anal.</em>, 2(2), 205-224.</p></li>
+<li><p><strong>Saad, Y.</strong> (2011). <em>Numerical Methods for Large Eigenvalue Problems</em> (2nd ed.). SIAM.</p></li>
+<li><p><strong>Oettli, W., &amp; Prager, W.</strong> (1964). “Compatibility of approximate solution of linear equations.” <em>Numer. Math.</em>, 6(1), 405-409.</p></li>
+</ol>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="examples.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Examples</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="methods.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Methods and Algorithms</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Xinye Chen
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Algorithm Reference</a><ul>
+<li><a class="reference internal" href="#norm-algorithms">1-Norm Algorithms</a><ul>
+<li><a class="reference internal" href="#hager-higham-algorithm">Hager-Higham Algorithm</a></li>
+<li><a class="reference internal" href="#power-iteration-1-norm">Power Iteration (1-norm)</a></li>
+<li><a class="reference internal" href="#oettli-prager-method">Oettli-Prager Method</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">2-Norm Algorithms</a><ul>
+<li><a class="reference internal" href="#singular-value-decomposition-svds">Singular Value Decomposition (SVDS)</a></li>
+<li><a class="reference internal" href="#lanczos-method">Lanczos Method</a></li>
+<li><a class="reference internal" href="#golub-kahan-bidiagonalization">Golub-Kahan Bidiagonalization</a></li>
+<li><a class="reference internal" href="#power-method-2-norm">Power Method (2-norm)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#convergence-analysis">Convergence Analysis</a><ul>
+<li><a class="reference internal" href="#hager-higham">Hager-Higham</a></li>
+<li><a class="reference internal" href="#power-iteration">Power Iteration</a></li>
+<li><a class="reference internal" href="#lanczos">Lanczos</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#numerical-stability">Numerical Stability</a><ul>
+<li><a class="reference internal" href="#loss-of-orthogonality">Loss of Orthogonality</a></li>
+<li><a class="reference internal" href="#ill-conditioned-systems">Ill-Conditioned Systems</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=d58853b1"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </body>
+</html>

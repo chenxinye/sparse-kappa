@@ -78,8 +78,12 @@ def power_method_cond(
     else:
         cond = sigma_max / sigma_min
     
-    if not np.isfinite(cond) or cond < 1:
+    # Condition numbers are mathematically >= 1; tiny sub-1 values here are
+    # numerical artifacts and should be clamped, while non-finite values are failures.
+    if not np.isfinite(cond):
         cond = 1e30
+    elif cond < 1:
+        cond = 1.0
     
     if verbose:
         print(f"\nσ_max = {sigma_max:.6e}")
@@ -406,8 +410,11 @@ def compute_condition_power_sparse_kappa(
         
         cond = float(result['condition_number'])
         
-        if not np.isfinite(cond) or cond < 1:
+        # Mirror the main estimator guardrail for wrapper callers.
+        if not np.isfinite(cond):
             return 1e30
+        if cond < 1:
+            return 1.0
         return cond
         
     except Exception as e:
